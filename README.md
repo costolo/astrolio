@@ -1,1 +1,1 @@
-(benco.st)[benco.st]
+[benco.st](benco.st)
