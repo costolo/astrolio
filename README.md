@@ -1,1 +1,1 @@
-[benco.st](benco.st)
+(ben-go to benco!)[benco.st]
