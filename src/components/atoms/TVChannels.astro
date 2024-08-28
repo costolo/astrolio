@@ -1,0 +1,20 @@
+<style>
+  section,
+  div {
+    height: 100%;
+    width: 100%;
+  }
+</style>
+
+<section>
+  <div id="gif-container" class="bg-cover bg-center"></div>
+</section>
+
+<script>
+  import { $gifURL } from 'src/store'
+  $gifURL.subscribe((url) => {
+    document
+      .getElementById('gif-container')
+      ?.setAttribute('style', `background-image: url(${url})`)
+  })
+</script>

@@ -1,0 +1,33 @@
+---
+import BaseNavigation from '@components/layout/BaseNavigation.astro'
+import BaseHead from '../components/layout/BaseHead.astro'
+import '../styles/global.css'
+
+interface Props {
+  title: string
+  description: string
+  classList?: string
+  pageTitle?: string
+  ogImage?: URL
+}
+
+const { title, description, classList, pageTitle, ogImage } = Astro.props
+---
+
+<html lang="en" class="h-full">
+  <BaseHead ogImage={ogImage} title={title} description={description} />
+
+  <body class:list={[classList]}>
+    <div class="mainContainer">
+      <BaseNavigation {pageTitle} />
+      <slot />
+    </div>
+    <style>
+      .mainContainer {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+      }
+    </style>
+  </body>
+</html>

@@ -1,0 +1,66 @@
+---
+interface Props {
+  pageTitle?: string
+}
+
+const { pageTitle } = Astro.props
+---
+
+<header class="border-b-4 border-black flex justify-between p-6">
+  <h1 class="hidden">{pageTitle}</h1>
+  <a href="/">
+    <p class="hidden-joke-trigger righteous text-4xl md:text-5xl lg:text-7xl">
+      benco<span class="righteous text-sm hidden-joke">stolo, go home</span>
+    </p>
+  </a>
+  <nav>
+    <a href="/uhf">
+      <!-- TODO refactor to style object -->
+      <div class="circle bg-[url(/images/sineWave.svg)]"></div>
+    </a>
+  </nav>
+</header>
+
+<script>
+  const seeds: number[] = []
+  for (let x = 0; x < 5; x++) {
+    seeds.push(Math.random())
+  }
+</script>
+
+<style lang="scss">
+  @keyframes move {
+    0% {
+      background-position: 0 0;
+    }
+
+    100% {
+      background-position: -100px 0;
+    }
+  }
+
+  .circle {
+    height: 48px;
+    width: 48px;
+    border-radius: 100%;
+    border: 6px solid #000;
+    animation: move 6s infinite alternate-reverse;
+    animation-timing-function: cubic-bezier(
+      --seeds[0],
+      --seeds[1],
+      --seeds[2],
+      --seeds[3]
+    );
+  }
+
+  .hidden-joke {
+    opacity: 0;
+    transition: opacity 0.25s ease-out 0.5s;
+  }
+
+  .hidden-joke-trigger:hover {
+    .hidden-joke {
+      opacity: 100;
+    }
+  }
+</style>

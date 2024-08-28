@@ -1,0 +1,41 @@
+---
+interface Props {
+  color?: string | undefined
+  gridRow?: string | undefined
+  gridColumn?: string | undefined
+}
+import colors from '../../styles/theme.json'
+
+if (Astro.props.color === undefined) {
+  const {
+    cards: { og }
+  } = colors
+  Astro.props.color = og[Math.floor(Math.random() * og.length)]
+}
+
+const { color, gridRow = 'auto', gridColumn = 'auto' } = Astro.props
+---
+
+<style define:vars={{ color: color, gridRow: gridRow, gridColumn: gridColumn }}>
+  div.brutal-card {
+    grid-row: var(--gridRow);
+    grid-column: var(--gridColumn);
+    position: relative;
+    background-color: var(--color);
+    border-radius: 0.5rem;
+    border: 3px solid black;
+    filter: drop-shadow(7px 7px 0 rgb(0 0 0 / 1));
+    transition: all;
+    padding: 1rem;
+    transition-duration: 0.5s;
+    animation: ease-in-out;
+    overflow: hidden;
+  }
+  div.brutal-card:hover {
+    filter: drop-shadow(5px 5px 0 rgb(0 0 0 / 1));
+  }
+</style>
+
+<div class="brutal-card" define:vars={{ color: color }}>
+  <slot />
+</div>
