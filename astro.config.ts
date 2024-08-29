@@ -6,9 +6,7 @@ export default defineConfig({
   site:
     process.env.VERCEL_ENV === "production"
       ? "https://benco.st"
-      : process.env.VERCEL_URL
-        ? `https://${process.env.VERCEL_URL}/`
-        : "https://localhost:3000/",
+      : "https://localhost:3000",
   trailingSlash: "ignore",
   integrations: [sitemap(), UnoCSS({ injectReset: true })],
   vite: {
