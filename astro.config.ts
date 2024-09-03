@@ -1,15 +1,13 @@
 import { defineConfig } from "astro/config";
+import node from '@astrojs/node';
 import sitemap from "@astrojs/sitemap";
 import UnoCSS from "unocss/astro";
-
-console.log(import.meta.env)
-console.log(process.env)
 
 export default defineConfig({
   site:
     process.env.NODE_ENV === "production"
-      ? process.env.SITE_URL
-      : process.env.LOCAL_URL,
+      ? 'https://benco.st'
+      : 'https://localhost:4321',
   trailingSlash: "ignore",
   integrations: [sitemap(), UnoCSS({ injectReset: true })],
   vite: {
@@ -17,4 +15,8 @@ export default defineConfig({
       exclude: ["@resvg/resvg-js"],
     },
   },
+  output: 'server',
+  adapter: node({
+    mode: 'standalone',
+  }),
 });
