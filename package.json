@@ -1,8 +1,12 @@
 {
   "name": "astrolio",
-  "version": "1.2.0",
+  "version": "1.5.0",
   "type": "module",
-  "packageManager": "pnpm@8.6.0",
+  "engines": {
+    "npm": ">= 10.0.0",
+    "node": ">= 21.0.0"
+  },
+  "packageManager": "npm@10.8.2",
   "homepage": "https://benco.st",
   "scripts": {
     "dev": "astro dev",
