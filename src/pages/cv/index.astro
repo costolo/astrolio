@@ -1,6 +1,11 @@
 ---
 import BaseLayout from '@components/layout/BaseLayout.astro'
 import Card from '@components/atoms/Card.astro'
+import { useUserAgent } from 'astro-useragent'
+import Ocean from '@components/atoms/Ocean.astro'
+
+const uaString = Astro.request.headers.get('user-agent')
+const { isMobile } = useUserAgent(uaString)
 ---
 
 <style>
@@ -9,9 +14,28 @@ import Card from '@components/atoms/Card.astro'
     margin: 0 auto;
   }
 </style>
-
 <BaseLayout>
-  <Card noBg>
-    <img src="images/resumelg.jpg" />
-  </Card>
+  {
+    isMobile ? (
+      <Card fullScreen>
+        {/* refactor these common class compositions */}
+        <p class="mt-4 outfit text-4xl md:text-5xl lg:text-7xl">Apologies,</p>
+        <p class="mt-4 outfit text-lg md:text-xl lg:text-2xl">
+          This content can only be viewed on large tablets and desktops.
+        </p>
+        <a
+          href="/"
+          title="Go back home"
+          class="block mt-4 px-4 py-2 border-2 border-black transition-colors duration-150 ease-in-out w-48 text-center poppins"
+        >
+          &larr; Go Home
+        </a>
+        <Ocean />
+      </Card>
+    ) : (
+      <Card noBg>
+        <img src="images/resumelg.jpg" />
+      </Card>
+    )
+  }
 </BaseLayout>

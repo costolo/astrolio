@@ -1,5 +1,4 @@
 ---
-import { useUserAgent } from 'astro-useragent'
 import BaseNavigation from '@components/layout/BaseNavigation.astro'
 import BaseHead from '../components/layout/BaseHead.astro'
 import '../styles/global.css'
@@ -13,25 +12,15 @@ interface Props {
 }
 
 const { title, description, classList, pageTitle } = Astro.props
-
-const uaString = Astro.request.headers.get('user-agent')
-const { isMobile } = useUserAgent(uaString)
 ---
 
 <html lang="en" class="h-full">
   <BaseHead title={title} description={description} />
 
   <body class:list={[classList]}>
-    <div class="mainContainer">
+    <div class="flex flex-col h-full">
       <BaseNavigation {pageTitle} />
       <slot />
     </div>
-    <style lang="scss">
-      .mainContainer {
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-      }
-    </style>
   </body>
 </html>
