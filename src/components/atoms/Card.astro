@@ -4,49 +4,69 @@ interface Props {
   gridRow?: string | undefined
   gridColumn?: string | undefined
   fullScreen?: boolean | undefined
+  noBg?: boolean | undefined
+  fixedWidth?: string | undefined
 }
 import colors from '../../styles/theme.json'
 
-if (Astro.props.color === undefined) {
-  const {
-    cards: { og }
-  } = colors
-  Astro.props.color = og[Math.floor(Math.random() * og.length)]
+if (!Boolean(Astro.props.noBg)) {
+  if (Astro.props.color === undefined) {
+    const {
+      cards: { og }
+    } = colors
+    Astro.props.color = og[Math.floor(Math.random() * og.length)]
+  }
 }
 
-const { color, gridRow = 'auto', gridColumn = 'auto', fullScreen } = Astro.props
+const {
+  color,
+  gridRow = 'auto',
+  gridColumn = 'auto',
+  fullScreen,
+  noBg
+} = Astro.props
 ---
 
 <style
-  lang="sass"
+  lang="scss"
   define:vars={{
     color: color,
     gridRow: gridRow,
-    gridColumn: gridColumn
+    gridColumn: gridColumn,
+    noBg: noBg
   }}
 >
-  div.brutal-card
-    grid-row: var(--gridRow)
-    grid-column: var(--gridColumn)
-    position: relative
-    background-color: var(--color)
-    border-radius: 0.5rem
-    border: 3px solid black
-    filter: drop-shadow(7px 7px 0 rgb(0 0 0 / 1))
-    transition: all
-    padding: 1rem
-    transition-duration: 0.5s
-    animation: ease-in-out
-    overflow: hidden
+  div.brutal-card {
+    grid-row: var(--gridRow);
+    grid-column: var(--gridColumn);
+    position: relative;
+    background-color: var(--color);
+    border-radius: 0.5rem;
+    border: 3px solid black;
+    filter: drop-shadow(7px 7px 0 rgb(0 0 0 / 1));
+    transition: all;
+    padding: 1rem;
+    transition-duration: 0.5s;
+    animation: ease-in-out;
+    overflow: hidden;
+    &.fullscreen {
+      height: 100%;
+      width: 100%;
+    }
 
-    &.fullscreen
-      height: 100%
-      width: 100%
+    &.noBg {
+      padding: unset;
+      width: 1241px;
+    }
+  }
 
-  div.brutal-card:hover
-    filter: drop-shadow(5px 5px 0 rgb(0 0 0 / 1))
+  div.brutal-card:hover {
+    filter: drop-shadow(5px 5px 0 rgb(0 0 0 / 1));
+  }
 </style>
 
-<div class={`brutal-card ${fullScreen ? 'fullscreen' : ''}`}>
+<div
+  class={`brutal-card ${fullScreen ? 'fullscreen' : ''} ${noBg ? 'noBg' : ''}`}
+>
   <slot />
 </div>

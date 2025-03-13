@@ -4,8 +4,8 @@ import Layout from '@layouts/Default.astro'
 
 <Layout
   title="benco.st"
-  pageTitle="ultra hi freq"
-  description="a television with two buttons"
+  pageTitle={Astro.props.pageTitle}
+  description={Astro.props.description}
   classList="h-full"
 >
   <main class="bg-pink p-6 flex-1">

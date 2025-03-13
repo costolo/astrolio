@@ -4,17 +4,14 @@ import Card from '@components/atoms/Card.astro'
 ---
 
 <style>
-  embed {
+  img {
+    display: block;
     margin: 0 auto;
   }
 </style>
 
 <BaseLayout>
-  <Card fullScreen>
-    <embed
-      src="pdfs/resume.pdf#toolbar=0&navpanes=0&scrollbar=0"
-      height="100%"
-      width="100%"
-    />
+  <Card noBg>
+    <img src="images/resumelg.jpg" />
   </Card>
 </BaseLayout>
