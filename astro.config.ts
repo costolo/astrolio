@@ -19,4 +19,10 @@ export default defineConfig({
   adapter: node({
     mode: 'standalone',
   }),
+  experimental: {
+    responsiveImages: true
+  },
+  image: {
+    experimentalLayout: 'responsive'
+  }
 });

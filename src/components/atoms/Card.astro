@@ -4,12 +4,15 @@ interface Props {
   gridRow?: string | undefined
   gridColumn?: string | undefined
   fullScreen?: boolean | undefined
-  noBg?: boolean | undefined
+  noPadding?: boolean | undefined
   fixedWidth?: string | undefined
+  scroll?: boolean | undefined
+  center?: boolean | undefined
+  widthString?: string | undefined
 }
 import colors from '../../styles/theme.json'
 
-if (!Boolean(Astro.props.noBg)) {
+if (!Boolean(Astro.props.noPadding)) {
   if (Astro.props.color === undefined) {
     const {
       cards: { og }
@@ -23,7 +26,9 @@ const {
   gridRow = 'auto',
   gridColumn = 'auto',
   fullScreen,
-  noBg
+  noPadding,
+  scroll,
+  center
 } = Astro.props
 ---
 
@@ -33,7 +38,7 @@ const {
     color: color,
     gridRow: gridRow,
     gridColumn: gridColumn,
-    noBg: noBg
+    noPadding: noPadding
   }}
 >
   div.brutal-card {
@@ -49,14 +54,23 @@ const {
     transition-duration: 0.5s;
     animation: ease-in-out;
     overflow: hidden;
+    width: fit-content;
     &.fullscreen {
       height: 100%;
       width: 100%;
     }
 
-    &.noBg {
+    &.noPadding {
       padding: unset;
-      width: 1241px;
+    }
+
+    &.scroll {
+      height: 80vh;
+      overflow: scroll;
+    }
+
+    &.center {
+      margin: 0 auto;
     }
   }
 
@@ -66,7 +80,13 @@ const {
 </style>
 
 <div
-  class={`brutal-card ${fullScreen ? 'fullscreen' : ''} ${noBg ? 'noBg' : ''}`}
+  class:list={[
+    'brutal-card',
+    { fullScreen },
+    { noPadding },
+    { scroll },
+    { center }
+  ]}
 >
   <slot />
 </div>
